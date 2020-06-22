@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Team;
+use Dotenv\Result\Result;
 use Illuminate\Http\Request;
 
 class EquipoController extends Controller
@@ -14,14 +15,14 @@ class EquipoController extends Controller
     }
     public function index()
     {
-        return view('Equipo.mostrar',[
-        'team'=>Team::paginate()
-        ]);
+        return view('Equipo.mostrar');
     }
-    public function listall()
+    public function listEquipo()
     {
-        $team=Team::select('');
+        $team=Team::paginate(5);
+        return view('Equipo.listEquipo',compact('team'));
     }
+  
     public function create()
     {
         return view('Equipo.crear',
@@ -36,7 +37,7 @@ class EquipoController extends Controller
             ]);
     }
     
-    public function store()
+    public function store(Request $request)
     {
         $team=request()->validate(
             [
@@ -45,37 +46,68 @@ class EquipoController extends Controller
             ],
             [
                 '*.required'=>'El campo es requerido',
-                
             ]
-
+    
         );
-        Team::create($team);
+        if($request->ajax())
+        {
+            Team::create($team);
+            return response()->json([
+                "mensaje"=>$request->all()
+            ]);
+        }
+        
         return redirect()->route('equipo.index')->with('status','El equipo se agrego con exito');
 
     }
-    public function edit(Team $team)
+    public function edit($id)
     {
-        return view('Equipo.editar',[
-            'teamitem'=>$team
-        ]);
+        $teamitem=Team::find($id);
+        return response()->json($teamitem);
+        // return view('Equipo.editar',[
+        //     'teamitem'=>$team
+        // ]);
     }
-    public function update(Team $team)
+    public function update(Request $request,$id )
     {
-        $team->update(request()->validate(
-            [
-                'name'=>'required',
-                'city'=>'required'
-            ],
-            [
-                '*.required'=>'El campo es requerido',
+        if($request->ajax())
+        {
+            $teamitem=Team::FindOrFail($id);
+            $input=$request->all();
+            $result=$teamitem->fill($input)->save();
+
+            if($result){
+                return response()->json(['success'=>'true']);
+            }
+            else{
+                return response()->json(['success'=>'false']);
+            }
+        }
+
+        // $team->update(request()->validate(
+        //     [
+        //         'name'=>'required',
+        //         'city'=>'required'
+        //     ],
+        //     [
+        //         '*.required'=>'El campo es requerido',
                 
-            ]
-        ));
-        return redirect()->route('equipo.index',$team)->with('status','El equipo se actualizo con exito');
+        //     ]
+        // ));
+        // return redirect()->route('equipo.index',$team)->with('status','El equipo se actualizo con exito');
     }
-    public function destroy(Team $team)
+    public function destroy($id)
     {
-        $team->delete();
-        return redirect()->route('equipo.index')->with('status','El equipo se elimino con exito');
+        $teamitem=Team::FindOrFail($id);
+        $result=$teamitem->delete();
+
+            if($result){
+                return redirect()->route('equipo.index')->with('status','El equipo se elimino con exito');
+            }
+            else{
+                return response()->json(['success'=>'false']);
+            }
+        // $team->delete();
+        // return redirect()->route('equipo.index')->with('status','El equipo se elimino con exito');
     }
 }

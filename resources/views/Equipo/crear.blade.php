@@ -1,13 +1,9 @@
-@extends('layout')
-@section('title','Equipo')
-
-@section('content')
-<div class="container">  
-    <div class="row">
-        <div class="col-12 col-sm-10 col-lg-6 mx-auto">
-            <form class="bg-white shadow rounded py-3 px-4 " method="POST" action="{{route('equipo.store')}}" autocomplete="off">
+<div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+            <form id="formcrear" class="bg-white shadow rounded py-3 px-4 " method="POST" action="{{route('equipo.store')}}" autocomplete="off">
             @csrf
-            <h1 class="text-center">
+            <h1 class="text-center" >
                 Equipo
             </h1>
             <hr>
@@ -18,6 +14,7 @@
                     <span class="invalid-feedback" role="alert">
                         <strong>{{$message}}</strong>
                     </span>  
+
                     @enderror
             </div>
             <div class="form-group">
@@ -32,12 +29,14 @@
             <div class="container-contact100-form-btn">
                 <div class="form-row">
                    <div class="col">
-                       <button class="btn btn-outline-dark btn-block btn-lg">
+                       <button class="btn btn-outline-dark btn-block btn-lg" id="btnguardar">
                            GUARDAR
                        </button>
                    </div>
                    <div class="col">
-                       <a class=" btn btn-danger btn-block btn-lg" href="{{route('equipo.index')}}">CANCELAR</a>
+                 
+                    <button type="button" class="btn btn-danger btn-block btn-lg" data-dismiss="modal">CANCELAR</button>
+                      
                    </div>
                 </div>
            </div>         
@@ -45,5 +44,6 @@
         </div>
   </div>
 </div>
-@endsection
+
+
     

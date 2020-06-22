@@ -37,7 +37,7 @@
             <th></th>
         </thead>
         <tbody>
-            @forelse ($atleta as $atleteitem)
+            @forelse ($data as $atleteitem)
             <tr>
                 <td>{{$atleteitem->id}}</td>
                 <td>{{$atleteitem->name}}</td>
@@ -47,8 +47,8 @@
                 <td>{{$atleteitem->height}}</td>
                 <td>{{$atleteitem->weight}}</td>
                 <td>{{$atleteitem->birthdate}}</td>
-                <td>{{$atleteitem->sport_id}}</td>
-                <td>{{$atleteitem->team_id}}</td>
+                <td>{{$atleteitem->sportname}}</td>
+                <td>{{$atleteitem->teamname}}</td>
                 <td>
                   <div class="form-row">
                     <div class="col">
@@ -59,7 +59,7 @@
                             </svg>
                         </a>
                     </div>
-                    @auth
+                    @if(auth()->check())
                         <div class="col">
                             <a class="btn-outline-info btn-lg" href="{{route('atleta.edit',$atleteitem)}}">
                                 <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -68,6 +68,7 @@
                                 </svg>
                                 </a>
                         </div>
+                        @if(auth()->user()->rol == 'admin')
                         <div class="col">     
                             <a type="button" class="btn-outline-danger btn-lg" data-toggle="modal" data-target="#exampleModal">
                                 <svg class="bi bi-archive-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +77,8 @@
                               </a>
                         </div>
                     </div>                     
-                    @endauth
+                    @endif
+                    @endif
                 </td>
                 @empty
                 <td class=" list-group-item border-0 ">

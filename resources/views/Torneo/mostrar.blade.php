@@ -37,6 +37,7 @@
                             <td> {{$torneoitem->startdate}}</td>
                             <td> {{$torneoitem->finishdate}} </td>
                             <td>
+                              @if(auth()->check())
                                 <div class="form-row">
                                     <div class="col">
                                         <a class="btn-outline-dark btn-lg" href="#">
@@ -46,7 +47,7 @@
                                             </svg>
                                         </a>
                                     </div>   
-                                    @auth                  
+                                    @if(auth()->user()->rol == 'admin')                
                                     <div class=" col">
                                         <a class=" btn-outline-info btn-lg" href="{{route('torneo.edit',$torneoitem)}}">
                                             <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +63,8 @@
                                             </svg> 
                                           </a>
                                     </div>
-                                    @endauth
+                                    @endif
+                                    @endif
                                 </div> 
                             </td>
                         @empty

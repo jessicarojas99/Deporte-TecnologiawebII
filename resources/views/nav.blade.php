@@ -34,9 +34,9 @@
                   <span class="sr-only">Toggle Dropdown</span>
                 </button>
                   <div class="dropdown-menu active">
-                    @auth                                  
+                    @if(auth()->check() && auth()->user()->rol == 'admin')                             
                     <a class="dropdown-item" href="{{route('register')}}">Usuario</a>
-                    @endauth
+                    @endif
                     <a class="dropdown-item" href="{{route('atleta.store')}}">Atletas</a>
                     <a class="dropdown-item" href="{{route('deporte.store')}}">Deporte</a>
                     <a class="dropdown-item" href="{{route('equipo.store')}}">Equipos</a>

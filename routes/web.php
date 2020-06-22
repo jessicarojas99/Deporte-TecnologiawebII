@@ -27,12 +27,14 @@ Route::resource('deporte', 'DeporteController')->parameters(['deporte'=>'sport']
 
 
 Route::get('/equipo','EquipoController@index')->name('equipo.index');
+Route::get('listEquipo/{page?}','EquipoController@listEquipo');
 Route::get('/equipo/crear','EquipoController@create')->name('equipo.create');
 Route::get('equipo/search', 'EquipoController@search')->name('equipo.search'); 
 Route::get('/equipo/{team}/editar','EquipoController@edit')->name('equipo.edit');
 Route::patch('/equipo/{team}','EquipoController@update')->name('equipo.update');
 Route::post('/equipo', 'EquipoController@store')->name('equipo.store');   
 Route::delete('/equipo/{team}','EquipoController@destroy')->name('equipo.destroy');
+
 
 
 Route::get('/torneo','TorneoController@index')->name('torneo.index');
@@ -47,7 +49,10 @@ Route::delete('/torneo/{torneo}','TorneoController@destroy')->name('torneo.destr
 
 Auth::routes();
 
-Route::resource('user', 'UserController');
+
 
 Route::view('/contacto', 'contacto') -> name('contacto');
 Route::post('contacto','MessageController@store');
+
+Route::resource('users','UserController');
+Route::get('users/{id}/edit/','UserController@edit');

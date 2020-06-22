@@ -16,9 +16,13 @@ class AtletaController extends Controller
     }
     public function index()
     {
+        $data=Athlete::join('sports','athletes.sport_id','=','sports.id')
+        ->join('teams','athletes.team_id','=','teams.id')
+        ->select('athletes.id','athletes.name','athletes.lastname','athletes.ci','athletes.gender','athletes.height','athletes.weight','athletes.birthdate','sports.name as sportname','teams.name as teamname')
+        ->get();
         return view('Atleta.lista',[
             'atleta'=>Athlete::paginate()
-        ]);
+        ],compact('data'));
     }
     public function search(Request $request)
     { 
