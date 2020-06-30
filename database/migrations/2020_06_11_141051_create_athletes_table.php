@@ -22,8 +22,8 @@ class CreateAthletesTable extends Migration
             $table->integer('height');
             $table->integer('weight');
             $table->date('birthdate');
-            $table->foreignId('sport_id')->constrained('sports');
-            $table->foreignId('team_id')->constrained('teams');
+            $table->foreignId('sport_id')->constrained('sports')->nullable();
+            $table->foreignId('team_id')->constrained('teams')->nullable();
             $table->timestamps();
         });
     }

@@ -21,12 +21,7 @@
       <li class="list-group-item">Estatura: {{$athlete->height}}</li>
       <li class="list-group-item">Peso: {{$athlete->weight}}</li>
       <li class="list-group-item">Fecha de Nacimiento: {{$athlete->birthdate}}</li>
-      @foreach ($equipo as $athlete)
-      <li class="list-group-item">Equipo: {{$athlete->name}}</li>
-     @endforeach  
-     @foreach ($deporte as $athlete)
-     <li class="list-group-item">Deporte: {{$athlete->name}}</li>
-    @endforeach  
+     
     
     
     </ul>

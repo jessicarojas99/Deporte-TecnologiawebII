@@ -11,16 +11,19 @@ class Team extends Model
     protected $table='teams'; 
     protected $primaryKey='id'; 
  
-    //forma que se busca el deporte
-    public function getRouteKeyName()
-    {
-        return 'id';
-    }
+
     public function scopeName($query,$name)
-     {
-         if(trim($name)!="")
-         {
-             $query->where(DB::raw("CONCAT(name)"),"LIKE","%$name%");
-         }
-     }
+    {
+        if($name)
+        {
+            return $query->where('name','like',"%$name%");
+        }
+    }
+    public function scopeCity($query,$city)
+    {
+        if($city)
+        {
+            return $query->where('city','like',"%$city%");
+        }
+    }
 }

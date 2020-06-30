@@ -4,7 +4,7 @@
 <div class="container">
     <div class="col-sm-12 mx-auto bg-white shadow rouned">
         <div class="list-group-item border-0  mx-auto bg-white ">
-            <h1 class=" display-4 text-center">Atletas</h1>
+            <h1 class=" display-4 text-center"><i class="fas fa-running"></i>Atletas</h1>
             <h4 class="text-center">registrados</h4>
             <hr style="color:red;background-color:red">
             <div class="card-body d-flex justify-content-between ">
@@ -14,7 +14,17 @@
                 </a>
                 @endauth
                 <form class="form-inline my-2 my-lg-0" method="GET" action="{{route('atleta.search')}}" autocomplete="off">                                     
-                    <input class="form-control mr-sm-2" type="search" placeholder="nombre" name="name" aria-label="Search">
+                  <select name="tipo" class="custom-select">
+                    <option >Elegir</option>
+                    <option >name</option>
+                    <option >lastname</option>
+                    <option >ci</option>
+                    <option >gender</option>
+                    <option >height</option>
+                    <option >weight</option>
+                    <option >birthdate</option>
+                  </select> 
+                  <input class="form-control mr-sm-2" type="search" placeholder="nombre" name="name" aria-label="Search">
                         <button class="btn btn-danger my-2 my-sm-0" type="submit"><svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" >
                             <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                             <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
@@ -89,9 +99,7 @@
             
         </tbody>
     </table>
-    <div class="list-group-item border-0">
-      {{$atleta->links()}}
-      </div>
+    
     <!-- Modal -->
         <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">

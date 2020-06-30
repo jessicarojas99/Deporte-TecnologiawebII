@@ -18,9 +18,16 @@ class Sport extends Model
    }
    public function scopeName($query,$name)
     {
-        if(trim($name)!="")
+        if($name)
         {
-            $query->where(DB::raw("CONCAT(name,'',modality)"),"LIKE","%$name%");
+            return $query->where('name','like',"%$name%");
+        }
+    }
+    public function scopeModality($query,$modality)
+    {
+        if($modality)
+        {
+            return $query->where('modality','like',"%$modality%");
         }
     }
 }

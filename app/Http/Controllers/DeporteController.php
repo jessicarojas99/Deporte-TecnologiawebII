@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
 use App\Sport;
+use App\Team;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Concat;
 
 class DeporteController extends Controller
 {
     public function __construct()
     {
         //si no esta autenticado solo me muestre las vistas show/index
-        $this->middleware('auth')->except('show','index','search');
+        $this->middleware('auth')->except('show','index','search','about');
         $this->middleware('admin')->only('destroy');
     }
     
@@ -30,7 +32,12 @@ class DeporteController extends Controller
             'sport'=>$sport
         ]);
     }
-  
+    public function about()
+    {
+        return view('about',[
+            'sport'=>Sport::all()
+            ]);
+    }
     public function create()
     {
         return view('Deporte.Deporte',
@@ -42,10 +49,10 @@ class DeporteController extends Controller
 
     public function search(Request $request)
     {
-       
-        return view('Deporte.DeporteTabla',[
-            'sport'=>Sport::name($request->get('name'))->paginate()
-            ]);
+       $name=$request->get('name');
+       $modality=$request->get('modality');
+       $sport=Sport::name($name)->modality($modality)->paginate(5);
+        return view('Deporte.DeporteTabla',compact('sport'));
     }
     public function store(ProjectRequest $request)
     {

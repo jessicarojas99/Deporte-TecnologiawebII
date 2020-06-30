@@ -1,46 +1,38 @@
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-            <form class="bg-white shadow rounded py-3 px-4 " id="formeditar" autocomplete="off" method="POST">
-            @csrf 
-            <h1 class="text-center">
-                Equipo editar
-            </h1>
-            <hr>
-            <div class="form-group">
-                {{-- <input id="id1" class="form-control bg-light shadow-sm" type="text" name="name" visible="false" value="{{old('id')}}"  > --}}
-                <label for="name">Nombre:</label>
-                <input id="name1" class="form-control bg-light shadow-sm @error('name')is-invalid @else border-0 @enderror " type="text" name="name" value="{{old('name')}}"  >
-                    @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{$message}}</strong>
-                    </span>  
-                    @enderror
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Editar Equipo</h1>
+                <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="form-group">
-                <label for="city">Ciudad:</label>
-                <input id="city1" class="form-control bg-light shadow-sm @error('city')is-invalid @else border-0 @enderror " type="text" name="city" value="{{old('city')}}"  >
-                    @error('city')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{$message}}</strong>
-                    </span>  
-                    @enderror
+            <div class="modal-body">
+                <form autocomplete="off" id="editar">
+                    @csrf
+                    <input type="hidden" id="id1" name="id1">
+                    
+                    <div class="form-group">
+                      
+                        <label for="name1">Nombre</label>
+                        <input type="text" name="name1" id="name1" class="form-control" value="{{ old('name') }}"> 
+                    </div>
+                    <div class="form-group">
+                        <label for="city1">Ciudad</label>
+                        <input type="text" name="city1" id="city1" class="form-control" value="{{ old('city') }}">
+                    </div>
+                </form>
             </div>
-            <div class="container-contact100-form-btn">
-                <div class="form-row">
-                   <div class="col">
-                       <button id="btnactualizar" class="btn btn-outline-dark btn-block btn-lg">
-                           ACTUALIZAR
-                       </button>
-                   </div>
-                   <div class="col">
-                       <a class=" btn btn-danger btn-block btn-lg" href="{{route('equipo.index')}}">CANCELAR</a>
-                   </div>
+            <div class="modal-footer">
+                <div class="col">
+                    <button type="button" id="actualizar" class="btn btn-dark btn-block" >Actualizar</button>
                 </div>
-           </div>
-            </form>
+                <div class="col">
+                    <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
+                </div>
+                
+               
+            </div>
         </div>
-  </div>
+    </div>
 </div>
-
-    

@@ -6,7 +6,8 @@
                         <a href="https://twitter.com/"><img src="images/twiter.png" width="30px"></a>
                         <a href="https://www.youtube.com/"><img src="images/youtube.png" width="30px"></a>
                 
-                    <p class=" text-light">Copyright | @2020</p>
+                    <p class=" text-light">Copyright | {{ date('d/m/Y') }}</p>
+                   
             </div>
 
  

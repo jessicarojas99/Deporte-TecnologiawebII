@@ -11,11 +11,11 @@ class Athlete extends Model
     protected $table='athletes'; 
     protected $primaryKey='id';
 
-    public function scopeName($query,$name)
+    public function scopeAthlete($query,$tipo,$buscar)
     {
-        if(trim($name)!="")
+        if(($tipo) && ($buscar))
         {
-            $query->where(DB::raw("CONCAT(name,'',lastname)"),"LIKE","%$name%");
+            return $query->where($tipo,'like',"%$buscar%");
         }
     }
 }

@@ -18,7 +18,8 @@ class AtletaController extends Controller
     {
         $data=Athlete::join('sports','athletes.sport_id','=','sports.id')
         ->join('teams','athletes.team_id','=','teams.id')
-        ->select('athletes.id','athletes.name','athletes.lastname','athletes.ci','athletes.gender','athletes.height','athletes.weight','athletes.birthdate','sports.name as sportname','teams.name as teamname')
+        ->select('athletes.id','athletes.name','athletes.lastname','athletes.ci','athletes.gender',
+        'athletes.height','athletes.weight','athletes.birthdate','sports.name as sportname','teams.name as teamname')
         ->get();
         return view('Atleta.lista',[
             'atleta'=>Athlete::paginate()
@@ -26,18 +27,20 @@ class AtletaController extends Controller
     }
     public function search(Request $request)
     { 
-        return view('Atleta.lista',[
-            'atleta'=>Athlete::name($request->get('name'))->paginate()
-            ]);
+    
+            $name=$request->get('name');
+            $tipo=$request->get('tipo');
+
+       $data=Athlete::athlete($tipo,$name)->paginate(5);
+        return view('Atleta.lista',compact('data'));
     }
     public function show(Athlete $athlete)
     {
-        $deporte=Sport::all();
-        $equipo=Team::all();
+        
         //sport variable para view
         return view('Atleta.show',[
             'athlete'=>$athlete
-        ],compact('deporte','equipo'));
+        ]);
     }
     public function create()
     {

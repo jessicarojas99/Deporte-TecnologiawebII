@@ -9,7 +9,7 @@
             <form class="bg-white shadow rounded py-3 px-4 " method="POST" action="{{route('contacto')}}" autocomplete="off">
             @csrf
             <h1 class="text-center">
-                Contacto
+                <i class="fas fa-envelope-open-text"></i> Contacto
             </h1>
             <hr>
             <div class="form-group">

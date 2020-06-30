@@ -15,8 +15,8 @@ class CreateSportTournamentTable extends Migration
     {
         Schema::create('sport_tournament', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sport_id')->constrained('sports');
-            $table->foreignId('tournament_id')->constrained('tournaments');
+            $table->foreignId('sport_id')->constrained('sports')->nullable();
+            $table->foreignId('tournament_id')->constrained('tournaments')->nullable();
             $table->timestamps();
         });
     }
